@@ -40,6 +40,9 @@ export default class ConfessionScrapper extends BaseScrapper {
     const url = `/${month.toLowerCase()}-${year}-confession`;
     const data = await this.get(url);
 
+    console.log("_________________Scraping confessions___________________");
+    console.log(`Scraping ${month} ${year} confessions from ${url}`);
+
     const result = await this.processHTMLEntities(data);
 
     await this.formatDataAndWriteToJSON(result);
@@ -56,20 +59,32 @@ export default class ConfessionScrapper extends BaseScrapper {
   }
 
   public async formatDataAndWriteToJSON(confessions: string) {
-    let affirmations: string[] = _.split(confessions, ". I");
-
-    affirmations = affirmations.map((sentence: string) => {
-      return `I${sentence}.`;
-    });
-
+    let affirmations: string[] = _.split(confessions, ". I").map(
+      (sentence) => `I ${sentence.trim()}.`
+    );
     affirmations = affirmations.filter(Boolean);
-
-    const jsonData = {
-      affirmations,
-    };
 
     const dataPath = path.join(__dirname, "./../data/data.json");
 
-    fs.writeFileSync(dataPath, JSON.stringify(jsonData, null, 2));
+    let existingData: any = { affirmations: [] };
+
+    if (fs.existsSync(dataPath)) {
+      const fileContent = fs.readFileSync(dataPath, "utf8");
+      existingData = JSON.parse(fileContent);
+    }
+
+    existingData.affirmations.push(...affirmations);
+
+    fs.writeFileSync(dataPath, JSON.stringify(existingData, null, 2), "utf8");
+  }
+
+  public async scrapeAllConfessions() {
+    for (let year = this.startYear; year <= this.endYear; year++) {
+      for (let month of this.months) {
+        await this.scrapeConfessionPerMonth(month, year);
+      }
+    }
+
+    console.log("All confessions have been scraped and saved to data.json");
   }
 }
