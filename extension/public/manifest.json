@@ -4,7 +4,7 @@
   "description": "Fresh, Bible-centered confession on every new tab. Stay inspired and rooted in faith throughout your day",
   "version": "1.0.0",
   "icons": {
-    "128": "tiki.png"
+    "128": "holytab.png"
   },
   "permissions": ["http://*/", "https://*/"],
   "content_security_policy": {
@@ -12,6 +12,6 @@
   },
   "action": {
     "default_popup": "index.html",
-    "default_icon": "tiki.png"
+    "default_icon": "holytab.png"
   }
 }
