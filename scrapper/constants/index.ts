@@ -1,0 +1,1 @@
+export const KINGSWORD_CHICAGO_URL = "https://chicago.kingsword.org";
