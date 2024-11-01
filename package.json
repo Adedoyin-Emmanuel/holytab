@@ -1,0 +1,10 @@
+{
+  "name": "Holytab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "extension": "cd extension && bun run build",
+    "web": "cd web && bun run dev"
+  }
+}
