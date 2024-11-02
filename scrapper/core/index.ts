@@ -47,7 +47,7 @@ I have uncommon opportunities, am unusually preferred, and enjoy acceptance with
 
 Goshen is my reality. I am loved by God, blessed everywhere, relevant in my generation, and positioned for greatness. I am under God’s intense rain and my church community enjoys great grace and flows in great power.`,
 
-`
+    `
 I am born of God, full of His Spirit, seated with Him in majesty and empowered for victorious living. I am justified by the blood of Jesus, enjoy unrestricted access to God, and constantly draw grace for an exceptional lifestyle.
 
 I have the spirit of excellence. 
@@ -63,7 +63,7 @@ The cloud is full and the rain is here!
 
 It is Goshen all the way, and in the spirit of excellence, I display God to my world.`,
 
-`I excitedly welcome 2024, anticipating a heaven-on-earth experience for me, my household and my church community. I am positioned for uncommon supernatural encounters throughout the year. The darkness around the world is not permitted to impact my life and the people connected to me.
+    `I excitedly welcome 2024, anticipating a heaven-on-earth experience for me, my household and my church community. I am positioned for uncommon supernatural encounters throughout the year. The darkness around the world is not permitted to impact my life and the people connected to me.
 
 Goshen is my experience throughout this new year as I enjoy an intimate relationship with God. I dominate in every area of my life through Zoe, the God-kind of life. This life that I share with Christ imparts every area of my life, supplying me with a supernatural edge.
 
@@ -75,7 +75,7 @@ This is my year of Enlightenment and Supernatural Advancement. I recover the los
 
 I am supernaturally equipped and empowered for God’s purpose. Beyond being blessed, I am a blessing to humanity globally as I distribute resources as God’s agent on earth. My gifts and talents are maximized. I am propelled by favor to produce uncommon results in my allocated space. I take my place in God’s end-time agenda as a member of the Supernatural army, wired and designed for signs and wonders.`,
 
-`I am a man/woman of purpose created in God’s image to fulfill a unique destiny. I am fearfully, marvelously and wonderfully made. Therefore, I celebrate my uniqueness.
+    `I am a man/woman of purpose created in God’s image to fulfill a unique destiny. I am fearfully, marvelously and wonderfully made. Therefore, I celebrate my uniqueness.
 
 I have a revelation of my divine purpose. My gifts find adequate expression in life and they open great doors for me before great men. Every gift of God within me is constantly stirred up to release my destiny.
 
@@ -143,5 +143,11 @@ I am diligent in my business so I always stand before kings and not before ordin
     }
 
     console.log("All confessions have been scraped and saved to data.json");
+  }
+
+  public async scrapePublicConfessions() {
+    for (const confessions of this.moreConfessions) {
+      await this.formatDataAndWriteToJSON(confessions);
+    }
   }
 }
