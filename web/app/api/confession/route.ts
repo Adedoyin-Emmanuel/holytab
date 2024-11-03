@@ -2,27 +2,13 @@ import { NextResponse } from "next/server";
 import { confessionSchema } from "../schema/schema";
 import { readData } from "../utils/readData";
 import { shuffleArray } from "../utils/shuffle";
-import { rateLimiter } from "../utils/rateLimiter";
+import { rateLimiterMiddleware } from "../middlewares/limiter";
 
 export const POST = async (req: Request) => {
   try {
-    const ip =
-      req.headers.get("x-forwarded-for") ||
-      req.headers.get("remote-addr") ||
-      "unknown";
-    try {
-      await rateLimiter.consume(ip);
-    } catch (rateLimitError) {
-      const retryAfter =
-        (rateLimitError as { msBeforeNext: number }).msBeforeNext / 1000;
-      return NextResponse.json(
-        {
-          success: false,
-          message: "Too many requests chief. Please try again later.",
-          retryAfter: `${Math.round(retryAfter)} seconds`,
-        },
-        { status: 429 }
-      );
+    const rateLimitResponse = await rateLimiterMiddleware(req);
+    if (rateLimitResponse) {
+      return rateLimitResponse;
     }
 
     const body = await req.json();
