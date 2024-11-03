@@ -12,7 +12,6 @@
     "@types/lodash": "^4.17.13",
     "cheerio": "^1.0.0",
     "got-scraping": "^4.0.7",
-    "joi": "^17.13.3",
     "lodash": "^4.17.21"
   }
 }

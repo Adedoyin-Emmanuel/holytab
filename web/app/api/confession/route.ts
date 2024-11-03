@@ -1,31 +1,27 @@
 import { NextResponse } from "next/server";
-import Joi from "joi";
-import fs from "fs";
-import path from "path";
 import { confessionSchema } from "../schema/schema";
+import { readData } from "../utils/readData";
 
-const dataPath = path.join(process.cwd() + "/data", "data.json");
-
-const readData = () => {
-  const data = fs.readFileSync(dataPath, "utf-8");
-  return JSON.parse(data);
-};
 
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const { error, value } = confessionSchema.validate(body);
+
     if (error) {
       return NextResponse.json(
-        { error: error.details[0].message },
+        {
+          success: false,
+          error: error.details[0].message,
+        },
         { status: 400 }
       );
     }
 
-    const { skip, take, search } = value;
+    const { skip = 0, take = 10, search = "" } = value;
 
     const data = readData();
-    let confessions = data.affirmations;
+    let confessions = data.affirmations || [];
 
     if (search) {
       confessions = confessions.filter((confession: string) =>
@@ -36,7 +32,7 @@ export const POST = async (req: Request) => {
     const paginatedConfessions = confessions.slice(skip, skip + take);
 
     return NextResponse.json({
-      message: "Confessions retrived successfully",
+      message: "Confessions retrieved successfully",
       success: true,
       data: {
         total: confessions.length,
@@ -45,8 +41,14 @@ export const POST = async (req: Request) => {
       },
     });
   } catch (err) {
+    console.error("API Error:", err);
     return NextResponse.json(
-      { message: "Failed to process request", data: {}, success: false },
+      {
+        message: "Failed to process request",
+        data: {},
+        success: false,
+        error: err instanceof Error ? err.message : "Unknown error",
+      },
       { status: 500 }
     );
   }
