@@ -48,10 +48,12 @@ export const POST = async (req: Request) => {
     console.error("API Error:", err);
     return NextResponse.json(
       {
-        message: "Oh sugar. Failed to process request",
-        data: {},
+        message:
+          err instanceof Error
+            ? err.message
+            : "Oh sugar. Failed to process request",
         success: false,
-        error: err instanceof Error ? err.message : "Unknown error",
+        data: {},
       },
       { status: 500 }
     );
