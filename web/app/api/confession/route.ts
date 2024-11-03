@@ -10,8 +10,21 @@ export const POST = async (req: Request) => {
       req.headers.get("x-forwarded-for") ||
       req.headers.get("remote-addr") ||
       "unknown";
+    try {
+      await rateLimiter.consume(ip);
+    } catch (rateLimitError) {
+      const retryAfter =
+        (rateLimitError as { msBeforeNext: number }).msBeforeNext / 1000;
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many requests chief. Please try again later.",
+          retryAfter: `${Math.round(retryAfter)} seconds`,
+        },
+        { status: 429 }
+      );
+    }
 
-    await rateLimiter.consume(ip);
     const body = await req.json();
     const { error, value } = confessionSchema.validate(body);
 
