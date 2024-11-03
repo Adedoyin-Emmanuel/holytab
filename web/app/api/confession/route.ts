@@ -2,9 +2,16 @@ import { NextResponse } from "next/server";
 import { confessionSchema } from "../schema/schema";
 import { readData } from "../utils/readData";
 import { shuffleArray } from "../utils/shuffle";
+import { rateLimiter } from "../utils/rateLimiter";
 
 export const POST = async (req: Request) => {
   try {
+    const ip =
+      req.headers.get("x-forwarded-for") ||
+      req.headers.get("remote-addr") ||
+      "unknown";
+
+    await rateLimiter.consume(ip);
     const body = await req.json();
     const { error, value } = confessionSchema.validate(body);
 
