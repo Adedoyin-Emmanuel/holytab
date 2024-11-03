@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { confessionSchema } from "../schema/schema";
 import { readData } from "../utils/readData";
-
+import { shuffleArray } from "../utils/shuffle";
 
 export const POST = async (req: Request) => {
   try {
@@ -18,7 +18,7 @@ export const POST = async (req: Request) => {
       );
     }
 
-    const { skip = 0, take = 10, search = "" } = value;
+    const { skip = 0, take = 10, search = "", randomize = true } = value;
 
     const data = readData();
     let confessions = data.affirmations || [];
@@ -27,6 +27,10 @@ export const POST = async (req: Request) => {
       confessions = confessions.filter((confession: string) =>
         confession.toLowerCase().includes(search.toLowerCase())
       );
+    }
+
+    if (randomize && skip === 0) {
+      confessions = shuffleArray(confessions);
     }
 
     const paginatedConfessions = confessions.slice(skip, skip + take);
@@ -44,7 +48,7 @@ export const POST = async (req: Request) => {
     console.error("API Error:", err);
     return NextResponse.json(
       {
-        message: "Failed to process request",
+        message: "Oh sugar. Failed to process request",
         data: {},
         success: false,
         error: err instanceof Error ? err.message : "Unknown error",
