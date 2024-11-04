@@ -86,3 +86,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  background-color: #FAFAFA;
+  background-image: linear-gradient(
+    90deg,
+    transparent 50%,
+    rgba(255, 255, 255, 0.5) 60%
+  );
+  background-size: 50px 50px;
+}
