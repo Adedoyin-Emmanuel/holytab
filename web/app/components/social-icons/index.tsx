@@ -10,7 +10,7 @@ const SocialIcons = ()=> {
 
     return (
         <div>
-            <h1>SocialIcons works!</h1>
+            <h1>SocialIcon`s works!</h1>
         </div>
     );  
 }
