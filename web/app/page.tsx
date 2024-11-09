@@ -1,6 +1,7 @@
 export default function Home() {
   return (
     <div className="w-screen h-screen flex items-center justify-center flex-col">
+      
       <h1 className="md:text-5xl text-2xl p-5 md:w-9/12 text-center font-semibold leading-[3rem] md:leading-relaxed content-section">
         Angels are constantly deployed to enforce every aspect of my salvation
         including health, finances and protection.
