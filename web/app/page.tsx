@@ -34,11 +34,17 @@ export default function Home() {
           "font-normal md:text-[3.25rem] text-2xl leading-[3.74rem] tracking-[-0.02em] p-5 md:w-8/12 text-center md:leading-relaxed"
         )}
       >
-        I bring forth good fruit, multiply exceedingly, influence my environment
-        positively, subdue every opposition and dominate everywhere.
+        I am in harvest and I am unstoppable. I am ending the year with uncommon
+        testimonies.
       </h1>
 
       <br />
+
+      <br/>
+
+      <section className="social-icons">
+
+      </section>
     </div>
   );
 }
