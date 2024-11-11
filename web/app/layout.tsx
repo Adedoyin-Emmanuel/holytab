@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { cn } from "@/lib/utils";
 
 const bai_jamjuree = Bai_Jamjuree({ subsets: ["latin"], weight: "400" });
 
@@ -16,8 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={bai_jamjuree.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body className={cn(bai_jamjuree.className, "dark:dark-bg")}>
+        <NextThemesProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </NextThemesProvider>
+      </body>
     </html>
   );
 }
