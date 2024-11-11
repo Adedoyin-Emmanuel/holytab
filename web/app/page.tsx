@@ -8,13 +8,13 @@ import { FaFacebook } from "react-icons/fa";
 
 import { Axios } from "@/config/axios";
 import { Confession } from "@/interfaces";
+import SettingsMenu from "@/app/components/settings";
 
 const timesNewRoman = localFont({
   src: "./../public/fonts/timesNewRoman.ttf",
 });
 
 export default function Home() {
-
   const socialIcons = [
     { id: "whatsapp", icon: <IoLogoWhatsapp /> },
     { id: "facebook", icon: <FaFacebook /> },
@@ -23,16 +23,8 @@ export default function Home() {
     { id: "reddit", icon: <SiReddit /> },
   ];
 
-  const [searchQuery, setSearchQuery] = useState("");
   const [confessionData, setConfessionData] = useState<Confession>();
 
-  const handleSearch = (event: { key: string }) => {
-    if (event.key === "Enter" && searchQuery.trim()) {
-      window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
-        searchQuery
-      )}`;
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,19 +41,8 @@ export default function Home() {
 
   return (
     <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
-     
-      <input
-        placeholder="SEARCH GOOGLE"
-        className="mx-auto md:w-1/3 w-11/12 h-10 bg-transparent
-          border-b border-[#A6A6A6] border-r-0 border-l-0 border-t-0
-          outline-none focus:outline-none
-          transition-all duration-300
-          focus:border-b-2
-          placeholder:text-gray-500 text-sm"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        onKeyPress={handleSearch}
-      />
+      <SettingsMenu />
+   
       <br />
       <br />
       <br />
