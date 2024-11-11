@@ -1,13 +1,27 @@
-"use client";
-
-import { Axios } from "@/config/axios";
 import SettingsMenu from "@/app/components/settings";
 import Search from "@/app/components/search";
 import SocialIcons from "@/app/components/social-icons";
 import ConfessionBadge from "@/app/components/confession-badge";
 import Confession from "@/app/components/confession";
+import { Axios } from "@/config/axios";
 
-export default function Home() {
+export default async function Home() {
+  let confessionText =
+    "I am the LORD, the God of all mankind. Is anything too hard for me?";
+
+  try {
+    const response = await Axios.post("/confession", {
+      take: 1,
+    });
+
+    if (response.status === 200) {
+      confessionText = response.data.data.confessions[0];
+      console.log(confessionText);
+    }
+  } catch (error) {
+    console.error("Error fetching confession:", error);
+  }
+
   return (
     <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
       <SettingsMenu />
@@ -21,7 +35,7 @@ export default function Home() {
 
       <section className="w-full flex items-center flex-col">
         <ConfessionBadge />
-        <Confession />
+        <Confession text={confessionText} />
       </section>
 
       <br />
