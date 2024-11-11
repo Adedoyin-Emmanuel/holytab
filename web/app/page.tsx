@@ -8,6 +8,7 @@ import { Confession } from "@/interfaces";
 import SettingsMenu from "@/app/components/settings";
 import Search from "@/app/components/search";
 import SocialIcons from "@/app/components/social-icons";
+import ConfessionBadge from "@/app/components/confession-badge";
 
 const timesNewRoman = localFont({
   src: "./../public/fonts/timesNewRoman.ttf",
@@ -41,8 +42,7 @@ export default function Home() {
       <br />
 
       <section className="w-full flex items-center flex-col">
-       
-
+        <ConfessionBadge />
         <h1
           className={cn(
             timesNewRoman.className,
