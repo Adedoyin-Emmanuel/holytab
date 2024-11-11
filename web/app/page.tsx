@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import { IoLogoWhatsapp, IoLogoTwitter } from "react-icons/io";
@@ -28,6 +28,16 @@ export default function Home() {
     { id: "telegram", icon: <SiTelegram /> },
     { id: "reddit", icon: <SiReddit /> },
   ];
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (event: { key: string }) => {
+    if (event.key === "Enter" && searchQuery.trim()) {
+      window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
+        searchQuery
+      )}`;
+    }
+  };
 
   return (
     <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
@@ -61,7 +71,6 @@ export default function Home() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
       <input
         placeholder="SEARCH GOOGLE"
         className="mx-auto md:w-1/3 w-11/12 h-10 bg-transparent
@@ -70,8 +79,10 @@ export default function Home() {
           transition-all duration-300
           focus:border-b-2
           placeholder:text-gray-500 text-sm"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyPress={handleSearch}
       />
-
       <br />
       <br />
       <br />
