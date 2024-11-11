@@ -3,6 +3,13 @@ import { cn } from "@/lib/utils";
 import { IoLogoWhatsapp, IoLogoTwitter } from "react-icons/io";
 import { SiTelegram, SiReddit } from "react-icons/si";
 import { FaFacebook } from "react-icons/fa";
+import { Settings, Monitor } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const timesNewRoman = localFont({
   src: "./../public/fonts/timesNewRoman.ttf",
@@ -11,6 +18,40 @@ const timesNewRoman = localFont({
 export default function Home() {
   return (
     <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
+      <div className="absolute top-4 right-4">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="p-2 rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-[#F5B700] dark:hover:text-white">
+            <Settings className="w-6 h-6" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              className="flex items-center gap-2"
+            >
+              <div className="w-4 h-4 rounded-full bg-[#fafafa] border border-gray-200" />
+              <span>
+                Light Mode
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="flex items-center gap-2"
+            >
+              <div className="w-4 h-4 rounded-full bg-black border border-gray-600" />
+              <span>
+                Dark Mode
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="flex items-center gap-2"
+            >
+              <Monitor className="w-4 h-4" />
+              <span>
+                System
+              </span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
       <input
         placeholder="SEARCH GOOGLE"
         className="mx-auto md:w-1/3 w-11/12 h-10 bg-transparent
