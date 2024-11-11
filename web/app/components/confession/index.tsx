@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 
 const timesNewRoman = localFont({
-  src: "./../public/fonts/timesNewRoman.ttf",
+  src: "./../../../public/fonts/timesNewRoman.ttf",
 });
 
 const Confession = () => {
