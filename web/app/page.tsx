@@ -16,7 +16,6 @@ export default async function Home() {
 
     if (response.status === 200) {
       confessionText = response.data.data.confessions[0];
-      console.log(confessionText);
     }
   } catch (error) {
     console.error("Error fetching confession:", error);
