@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
+import { Axios } from "@/config/axios";
 
 const timesNewRoman = localFont({
   src: "./../public/fonts/timesNewRoman.ttf",
@@ -38,6 +39,8 @@ export default function Home() {
       )}`;
     }
   };
+
+  
 
   return (
     <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
