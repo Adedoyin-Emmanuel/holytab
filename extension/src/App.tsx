@@ -12,7 +12,6 @@ const App = () => {
   );
 
   useEffect(() => {
-    // Fetch the local JSON file
     fetch("/data/data.json")
       .then((response) => {
         if (!response.ok) {
@@ -21,7 +20,6 @@ const App = () => {
         return response.json();
       })
       .then((data) => {
-        // Randomly select a confession from the affirmations array
         const affirmations = data.affirmations;
         const randomConfession =
           affirmations[Math.floor(Math.random() * affirmations.length)];
