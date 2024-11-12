@@ -29,7 +29,7 @@ const SocialIcons: React.FC<SocialIconsProps> = ({ confessionText }) => {
   const shareUrl = `${baseUrl}?confession=${encodedConfessionForUrl}`;
 
   const getSharingUrl = (platform: SocialPlatform): string => {
-    const text = encodeURIComponent(`"${confessionText}"`);
+    const text = encodeURIComponent(`${confessionText}`);
 
     const urls: Record<SocialPlatform, string> = {
       whatsapp: `https://api.whatsapp.com/send?text=${text}%0A${shareUrl}`,
