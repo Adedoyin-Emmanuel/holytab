@@ -5,6 +5,8 @@ import ConfessionBadge from "@/app/components/confession-badge";
 import Confession from "@/app/components/confession";
 import { Axios } from "@/config/axios";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 10;
 export default async function Home() {
   let confessionText =
     "I am the LORD, the God of all mankind. Is anything too hard for me?";
