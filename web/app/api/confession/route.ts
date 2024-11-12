@@ -1,15 +1,24 @@
 import { NextResponse } from "next/server";
 import { confessionSchema } from "../schema/schema";
-import { readData } from "../utils/readData";
 import { shuffleArray } from "../utils/shuffle";
 import { rateLimiterMiddleware } from "../middlewares/limiter";
 
+let cachedData: any = null;
+
+function loadConfessions() {
+  if (!cachedData) {
+    const data = require("./../../data/data.json");
+    cachedData = data.affirmations || [];
+  }
+  return cachedData;
+}
+
 export const POST = async (req: Request) => {
   try {
-    // const rateLimitResponse = await rateLimiterMiddleware(req);
-    // if (rateLimitResponse) {
-    //   return rateLimitResponse;
-    // }
+    const rateLimitResponse = await rateLimiterMiddleware(req);
+    if (rateLimitResponse) {
+      return rateLimitResponse;
+    }
 
     const body = await req.json();
     const { error, value } = confessionSchema.validate(body);
@@ -26,8 +35,7 @@ export const POST = async (req: Request) => {
 
     const { skip = 0, take = 10, search = "", randomize = true } = value;
 
-    const data = readData();
-    let confessions = data.affirmations || [];
+    let confessions = loadConfessions();
 
     if (search) {
       confessions = confessions.filter((confession: string) =>
