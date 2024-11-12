@@ -1,17 +1,25 @@
 {
   "manifest_version": 3,
-  "name": "Holytab",
-  "description": "Fresh, Bible-centered confession on every new tab. Stay inspired and rooted in faith throughout your day",
+  "name": "HolyTab",
+  "description": "Fresh, Bible-centered confession on every new tab. Stay inspired and rooted in faith throughout your day.",
   "version": "1.0.0",
   "icons": {
-    "128": "holytab.png"
+    "16": "16x16.png",
+    "32": "32x32.png",
+    "64": "64x54.png",
+    "72":"72x72.png",
+    "96": "96x96.png",
+    "128": "128x128.png",
+    "192":"192x192.png",
+    "256":"256x256.png",
+    "384":"384x384.png",
+    "512":"512x512.png"
   },
-  "permissions": ["http://*/", "https://*/"],
+  "permissions": ["storage"],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
   "content_security_policy": {
-    "extension_pages": "index.html"
-  },
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": "holytab.png"
+    "extension_pages": "script-src 'self'; object-src 'self'"
   }
 }
