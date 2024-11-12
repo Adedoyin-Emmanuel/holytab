@@ -4,10 +4,60 @@ import SocialIcons from "@/app/components/social-icons";
 import ConfessionBadge from "@/app/components/confession-badge";
 import Confession from "@/app/components/confession";
 import { Axios } from "@/config/axios";
+import { Metadata, ResolvingMetadata } from "next";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 10;
-export default async function Home() {
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  let confession =
+    "I am the LORD, the God of all mankind. Is anything too hard for me?";
+
+  if (searchParams.confession) {
+    const rawConfession = Array.isArray(searchParams.confession)
+      ? searchParams.confession[0]
+      : searchParams.confession;
+    confession = decodeURIComponent(decodeURIComponent(rawConfession));
+  }
+
+
+  return {
+    title: "Holy Tab - Daily Confessions",
+    description: confession,
+    openGraph: {
+      title: "Holy Tab - Daily Confessions",
+      description: confession,
+      images: [
+        {
+          url: "https://holytab.adedoyin.dev/holy.png",
+          width: 1080,
+          height: 1080,
+          alt: "Daily Confession",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Holy Tab - Daily Confessions",
+      description: confession,
+      images: ["https://holytab.adedoyin.dev/holy.png",],
+    },
+  };
+}
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   let confessionText =
     "I am the LORD, the God of all mankind. Is anything too hard for me?";
 
@@ -21,6 +71,13 @@ export default async function Home() {
     }
   } catch (error) {
     console.error("Error fetching confession:", error);
+  }
+
+  if (searchParams.confession) {
+    const encodedConfession = Array.isArray(searchParams.confession)
+      ? searchParams.confession[0]
+      : searchParams.confession;
+    confessionText = decodeURIComponent(decodeURIComponent(encodedConfession));
   }
 
   return (
@@ -48,7 +105,7 @@ export default async function Home() {
       <br />
 
       <p className="uppercase text-sm">Share on your socials below</p>
-      <SocialIcons />
+      <SocialIcons confessionText={confessionText} />
     </div>
   );
 }
