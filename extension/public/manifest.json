@@ -6,20 +6,20 @@
   "icons": {
     "16": "16x16.png",
     "32": "32x32.png",
-    "64": "64x54.png",
-    "72":"72x72.png",
+    "48": "48x48.png",
+    "64": "64x64.png",
     "96": "96x96.png",
     "128": "128x128.png",
-    "192":"192x192.png",
-    "256":"256x256.png",
-    "384":"384x384.png",
-    "512":"512x512.png"
+    "192": "192x192.png",
+    "256": "256x256.png",
+    "384": "384x384.png",
+    "512": "512x512.png"
   },
   "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
   }
 }
