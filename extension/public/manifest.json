@@ -2,12 +2,12 @@
   "manifest_version": 3,
   "name": "HolyTab",
   "description": "Fresh, Bible-centered confession on every new tab. Stay inspired and rooted in faith throughout your day.",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "icons": {
     "16": "16x16.png",
     "32": "32x32.png",
     "48": "48x48.png",
-    "128": "logo.png"
+    "128": "128x128.png"
   },
   "permissions": ["storage"],
   "chrome_url_overrides": {
