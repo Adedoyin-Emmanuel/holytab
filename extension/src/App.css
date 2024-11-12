@@ -1,19 +1,33 @@
 @font-face {
-  font-family: 'Times New Roman';
-  src: url('/fonts/timesNewRoman.ttf') format('truetype');
+  font-family: "Times New Roman";
+  src: url("/fonts/timesNewRoman.ttf") format("truetype");
 }
-
 
 @font-face {
-  font-family: 'Bai Jamjuree';
-  src: url('/fonts/baiJamjuree.ttf') format('truetype');
+  font-family: "Bai Jamjuree";
+  src: url("/fonts/baiJamjuree.ttf") format("truetype");
 }
 
-
 .timesNewRoman {
-  font-family: 'Times New Roman', serif;
+  font-family: "Times New Roman", serif !important;
 }
 
 .baiJamjuree {
-  font-family: 'Bai Jamjuree', sans-serif;
+  font-family: "Bai Jamjuree";
+}
+
+body {
+  font-family: "Bai Jamjuree";
+}
+
+h1 {
+  font-family: "Times New Roman", serif !important;
+}
+
+.dark body {
+  background-image: url("/dark-mode.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
