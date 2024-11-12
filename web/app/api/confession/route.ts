@@ -6,10 +6,10 @@ import { rateLimiterMiddleware } from "../middlewares/limiter";
 
 export const POST = async (req: Request) => {
   try {
-    const rateLimitResponse = await rateLimiterMiddleware(req);
-    if (rateLimitResponse) {
-      return rateLimitResponse;
-    }
+    // const rateLimitResponse = await rateLimiterMiddleware(req);
+    // if (rateLimitResponse) {
+    //   return rateLimitResponse;
+    // }
 
     const body = await req.json();
     const { error, value } = confessionSchema.validate(body);
