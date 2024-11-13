@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <GoogleAnalytics gaId="G-JDCVFVGCF0" />
       <head />
-      <body className={cn(bai_jamjuree.className, "dark:dark-bg")}>
+      <body className={cn(bai_jamjuree.className, "dark:dark-bg bg-[#EBEBEB]")}>
         <NextThemesProvider
           attribute="class"
           defaultTheme="system"
