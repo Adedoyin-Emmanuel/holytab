@@ -12,7 +12,7 @@ const SettingsMenu = () => {
   const { setTheme } = useTheme();
 
   return (
-    <div className="absolute top-4 right-4">
+    <div className="fixed md:top-14 top-28 right-6 z-10">
       <DropdownMenu>
         <DropdownMenuTrigger className="p-2 rounded-full transition-colors hover:bg-gray-100 dark:hover:bg-[#F5B700] dark:hover:text-white">
           <Settings className="w-6 h-6" />

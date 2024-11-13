@@ -5,6 +5,7 @@ import ConfessionBadge from "@/app/components/confession-badge";
 import Confession from "@/app/components/confession";
 import { Axios } from "@/config/axios";
 import { Metadata, ResolvingMetadata } from "next";
+import AnnouncementBanner from "@/app/components/announcement-banner";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 10;
@@ -28,7 +29,6 @@ export async function generateMetadata(
     confession = decodeURIComponent(decodeURIComponent(rawConfession));
   }
 
-
   return {
     title: "Holy Tab - Daily Confessions",
     description: confession,
@@ -48,7 +48,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: "Holy Tab - Daily Confessions",
       description: confession,
-      images: ["https://holytab.adedoyin.dev/holy.png",],
+      images: ["https://holytab.adedoyin.dev/holy.png"],
     },
   };
 }
@@ -81,31 +81,34 @@ export default async function Home({
   }
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
-      <SettingsMenu />
+    <>
+      <AnnouncementBanner />
+      <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
+        <SettingsMenu />
 
-      <Search />
+        {/* <Search /> */}
 
-      <br />
-      <br />
-      <br />
-      <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-      <section className="w-full flex items-center flex-col">
-        <ConfessionBadge />
-        <Confession text={confessionText} />
-      </section>
+        <section className="w-full flex items-center flex-col">
+          <ConfessionBadge />
+          <Confession text={confessionText} />
+        </section>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-      <p className="uppercase text-sm">Share on your socials below</p>
-      <SocialIcons confessionText={confessionText} />
-    </div>
+        <p className="uppercase text-sm">Share on your socials below</p>
+        <SocialIcons confessionText={confessionText} />
+      </div>
+    </>
   );
 }
