@@ -19,7 +19,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   let confession =
-    "I am the LORD, the God of all mankind. Is anything too hard for me?";
+    "Get fresh, Bible-centered confessions on every new tab. Stay inspired and rooted in faith throughout your day.";
 
   if (searchParams.confession) {
     const rawConfession = Array.isArray(searchParams.confession)
