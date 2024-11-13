@@ -4,6 +4,11 @@
 
 Transform every new tab into a moment of spiritual reflection
 
+## Built By 👨
+
+1. Adedoyin Emmanuel Adeniyi (Fullstack Engineer) <https://adedoyinemmanuel.dev>
+2. Frames 56 (Product Designer) <https://frame.panthone.design>
+
 ## ✨ Overview
 
 Holy Tab is a Chrome extension that transforms your new tab experience into a spiritual journey. Each time you open a new tab, you'll be greeted with a fresh, Bible-centered confession to inspire your faith and keep you rooted in God's word throughout your day.
@@ -18,6 +23,7 @@ Holy Tab is a Chrome extension that transforms your new tab experience into a sp
 - **Lightweight**: Fast-loading and resource-efficient
 - **Offline Support**: Access confessions even without internet connection
 - **Free & Open Source**: It is free and open source.
+- **Social Sharing**: Share your confessions with folks on various social platforms.
 
 ![Features Overview](md-assets/illustration-2.png)
 
@@ -41,10 +47,15 @@ To set up the development environment:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/holy-tab.git
+git clone https://github.com/adedoyin-emmanuel/holytab.git
 
 # Navigate to project directory
-cd holy-tab
+cd holytab
+
+# Navigate to scrapper, web or extension directory
+
+cd web
+
 
 # Install dependencies
 npm install
