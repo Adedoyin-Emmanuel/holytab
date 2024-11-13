@@ -2,7 +2,7 @@
 
 # HolyTab 🎖️
 
-Transform every new tab into a moment of spiritual reflection
+Transform every new tab into a moment of spiritual reflection <https://holytab.adedoyin.dev>
 
 ## Built By 👨
 
@@ -39,7 +39,7 @@ Holy Tab is a Chrome extension that transforms your new tab experience into a sp
 1. Simply open a new tab in Chrome
 2. Read and meditate on the displayed confession
 3. Refresh the page for a new confession (optional)
-4. Click on the logo to visit our website
+4. Share confession with your friends and family on various social platforms.
 
 ## 🛠️ Development
 
