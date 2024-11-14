@@ -9,7 +9,6 @@
     "48": "48x48.png",
     "128": "128x128.png"
   },
-  "permissions": ["storage"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
