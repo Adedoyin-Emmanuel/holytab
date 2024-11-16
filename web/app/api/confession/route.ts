@@ -3,6 +3,7 @@ import { confessionSchema } from "../schema/schema";
 import { shuffleArray } from "../utils/shuffle";
 import { rateLimiterMiddleware } from "../middlewares/limiter";
 
+
 let cachedData: any = null;
 
 function loadConfessions() {

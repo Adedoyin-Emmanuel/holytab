@@ -4,6 +4,8 @@
 
 Transform every new tab into a moment of spiritual reflection <https://holytab.adedoyin.dev>
 
+[Download HolyTab from Chrome webstore](https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd)
+
 ## Why Did I Build This ❓ / How I built this 🤔
 
 The spirit of God has laid it upon my heart last year (2023) to build a confession app. Then, I was in KTI (Kingsword Training Institute) Level 1. I didn't pay much attention to till last month (October 2024). Holy Spirit told me again and this time I was like yeah, I've to build this. I did some research to know if someone has built something like this before but to my surprise, I found none. Most bible related extensions were just typical bible verses chrome extensions and there wasn't a site where I could get a lot of confessions from. So I started building mine. I got confessions from Kingsword Chicago website. <https://chicago.kingsword.org>. And then I did some editing and then I had about 1,000 confessions. I got more confessions from my Deacon in church, then from my local church installation <https://kingswordalagbado.org>. After compling everthing, I had about 2k confessions to start with. I built an API out of it and then contacted Frames. Frames is a cool guy I met at Osca Fest (Tech event) last year. To my surprise he agreed to work on the project with me. I was so surprised because everytime I tried reaching out to a UI designer to work on a projct together, it is either I get aired or most times they are busy with other projects which I totally understand. He started working and then bingo Frames was done. Then I started cooking, and then before I knew it, I was done. I deployed the web version, tested it and sent it to my friends. I then packaged the extension to submit on chrome store. To my surprise, creating a developer account on Chrome costs $5. I was shocked. I had some funds on me but spending $5 on something I built for free and didn't monetize wasn't something I expected. But then, this zeal that woudln't allow me end this project just because of $5. I eventually paid the funds and published the extension to chrome store.
@@ -33,7 +35,7 @@ Holy Tab is a Chrome extension that transforms your new tab experience into a sp
 ![Features Overview](md-assets/illustration-2.png)
 
 ## 🔧 Installation
-
+[Download HolyTab from Chrome webstore](https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd)
 1. Visit the [Chrome Web Store](https://chrome.google.com/webstore)
 2. Search for "Holy Tab" or click the direct link
 3. Click "Add to Chrome"
