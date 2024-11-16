@@ -23,7 +23,7 @@ const AnnouncementBanner = () => {
           Stay inspired with daily Bible confessions every time you open a new
           tab.
         </h1>
-        <Link href="/" target="_blank" className={cn("underline")}>
+        <Link href="https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd" target="_blank" className={cn("underline")}>
           Download our Chrome extension today!
         </Link>{" "}
       </div>
