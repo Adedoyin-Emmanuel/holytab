@@ -47,6 +47,7 @@ Holy Tab is a Chrome extension that transforms your new tab experience into a sp
 2. Read and meditate on the displayed confession
 3. Refresh the page for a new confession (optional)
 4. Share confession with your friends and family on various social platforms.
+5. Visit  <https://documenter.getpostman.com/view/25154969/2sAYBREtgn> to integrate Holytabs API in your app.
 
 ## 🛠️ Development
 
