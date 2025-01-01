@@ -38,16 +38,21 @@ export default class ConfessionScrapper extends BaseScrapper {
 
   public moreConfessions = [
     `
-      I am born of God, and I walk in victory in every area of my life. I am justified freely by the blood of Jesus, living a life free from condemnation, guilt, and shame. I operate in uncompromised dominion everywhere I go and in all things I do.
+    I am grateful to God for the redemption made available to me in Christ Jesus and for all the victories and breakthroughs of the past year. 
 
-      I dwell perpetually under God’s grace; therefore, sin, sickness, and lack cannot dominate me. My focus is steadfastly fixed on Jesus, and through Him, I receive an unending supply of grace in all situations. I am never overwhelmed because I have His strength and wisdom.
+    Indeed, God, who has been on my side, has been my strength, my fortress, and my refuge. Blessed be the LORD, who has not given me as prey to the teeth of the enemy of my soul.
 
-      I am secure in the unfailing love of God, and I am completely free from every form of satanic oppression. I discern the secrets of this season, and they are evident in the way I live my life. I am successful, prosperous, and flourishing in every aspect of my life.
+    I start this year fully conscious of the righteous nature given to me in Christ Jesus. I stand before God without any sense of guilt, shame, or condemnation. 
 
-      Everything is happening fast around me, and I am dripping blessings everywhere I go. Yes indeed, it won’t be long now—GOD’s Decree! “Things are going to happen so fast my head will swim, one thing fast on the heels of the other. I won’t be able to keep up! Everything will be happening at once—and everywhere I look, blessings! Blessings like wine pouring off the mountains and hills.”
+    I am eternally forgiven through the blood of Jesus and drenched in His grace. I am bold and fearless and enjoy all-around dominion through the abundance of grace and the gift of righteousness.
 
-      I am finishing this year strongly and remarkably—with renewed vision, supernatural energy, overflowing grace, extraordinary speed, and unspeakable joy. I am positioned under the intense rain of God’s blessings!
+    I am loved by God, blessed to be a blessing, favoured for exceptional results, and anointed for a fruitful life. Sicknesses, lack, and every form of danger are forbidden in and around me throughout 2025. I am satisfied with a healthy, long, productive, and purposeful life.
 
+    In 2025, I am focused on Jesus, His finished work, and His assignment for my life. I am free from all distractions, and I run my race with patience and full momentum, even as I lay aside every encumbrance and the sin that so easily entangles me.
+
+    The abundance of God’s rain is over my household and church community. I am positioned for uncommon harvests through this rain, and I walk in an unusual increase in every aspect of my life. I am impactful, prosperous, and consistently manifest the goodness of God in my space. 
+
+    I am fully drenched in the abundance of God’s rain, and I drip His glory everywhere. I am a carrier of His presence, and I am a solution provider to my world. I am a light that shines in darkness, and I am a city set on a hill that cannot be hidden.
     `,
   ];
 
