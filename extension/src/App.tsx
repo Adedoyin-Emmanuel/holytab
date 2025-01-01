@@ -31,7 +31,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col dark:dark-bg bg-[#EBEBEB]">
+    <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
       <SettingsMenu />
 
       <Search />
