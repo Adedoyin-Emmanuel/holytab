@@ -83,7 +83,7 @@ export default async function Home({
   return (
     <>
       <AnnouncementBanner />
-      <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col">
+      <div className="h-screen flex items-center justify-center gap-5 flex-col">
         <SettingsMenu />
 
         {/* <Search /> */}
@@ -93,7 +93,7 @@ export default async function Home({
         <br />
         <br />
 
-        <section className="w-full flex items-center flex-col">
+        <section className="w-full flex items-center flex-col overflow-x-hidden">
           <ConfessionBadge />
           <Confession text={confessionText} />
         </section>
