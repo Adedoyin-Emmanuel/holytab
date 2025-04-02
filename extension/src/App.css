@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Times New Roman";
   src: url("/fonts/timesNewRoman.ttf") format("truetype");

@@ -1,11 +1,6 @@
-import SettingsMenu from "@/app/components/settings";
-import Search from "@/app/components/search";
-import SocialIcons from "@/app/components/social-icons";
-import ConfessionBadge from "@/app/components/confession-badge";
-import Confession from "@/app/components/confession";
-import { Axios } from "@/config/axios";
 import { Metadata, ResolvingMetadata } from "next";
 import AnnouncementBanner from "@/app/components/announcement-banner";
+import ConfessionContainer from "@/app/components/confession-container";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 10;
@@ -53,62 +48,11 @@ export async function generateMetadata(
   };
 }
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
-  let confessionText =
-    "I am the LORD, the God of all mankind. Is anything too hard for me?";
-
-  try {
-    const response = await Axios.post("/confession", {
-      take: 1,
-    });
-
-    if (response.status === 200) {
-      confessionText = response.data.data.confessions[0];
-    }
-  } catch (error) {
-    console.error("Error fetching confession:", error);
-  }
-
-  if (searchParams.confession) {
-    const encodedConfession = Array.isArray(searchParams.confession)
-      ? searchParams.confession[0]
-      : searchParams.confession;
-    confessionText = decodeURIComponent(decodeURIComponent(encodedConfession));
-  }
-
+export default function Home() {
   return (
     <>
       <AnnouncementBanner />
-      <div className="h-screen flex items-center justify-center gap-5 flex-col">
-        <SettingsMenu />
-
-        {/* <Search /> */}
-
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <section className="w-full flex items-center flex-col overflow-x-hidden">
-          <ConfessionBadge />
-          <Confession text={confessionText} />
-        </section>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <p className="uppercase text-sm">Share on your socials below</p>
-        <SocialIcons confessionText={confessionText} />
-      </div>
+      <ConfessionContainer />
     </>
   );
 }
