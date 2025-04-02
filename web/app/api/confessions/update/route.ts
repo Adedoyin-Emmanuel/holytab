@@ -4,8 +4,8 @@ import fs from "fs";
 
 let cachedData: any = null;
 
-function loadConfessions() {
-  if (!cachedData) {
+function loadConfessions(forceReload: boolean = false) {
+  if (!cachedData || forceReload) {
     try {
       const dataPath = path.join(process.cwd(), "app/data/data.json");
       if (!fs.existsSync(dataPath)) {
@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       "Access-Control-Allow-Headers": "Content-Type",
     };
 
-    const confessions = loadConfessions();
+    const confessions = loadConfessions(true);
 
     if (confessions.length === 0) {
       return NextResponse.json(
@@ -79,9 +79,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         message:
-          err instanceof Error
-            ? err.message
-            : "Failed to retrieve confessions",
+          err instanceof Error ? err.message : "Failed to retrieve confessions",
         success: false,
         data: {},
       },
@@ -95,4 +93,4 @@ export async function POST(req: Request) {
       }
     );
   }
-} 
+}

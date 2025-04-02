@@ -8,8 +8,8 @@ import fs from "fs";
 let cachedData: any = null;
 let lastIndex = 0;
 
-function loadConfessions() {
-  if (!cachedData) {
+function loadConfessions(forceReload: boolean = false) {
+  if (!cachedData || forceReload) {
     try {
       const dataPath = path.join(process.cwd(), "app/data/data.json");
       if (!fs.existsSync(dataPath)) {
