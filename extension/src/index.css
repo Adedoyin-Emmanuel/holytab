@@ -2,11 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Times New Roman";
+  src: url("/fonts/timesNewRoman.ttf") format("truetype");
+}
+
+.timesNewRoman {
+  font-family: "Times New Roman", serif;
+}
+
+.bai-jamjuree {
+  font-family: "Bai Jamjuree", sans-serif;
+}
+
+:root {
+  background-color: #ebebeb;
+  color: #000000;
+}
+
+.dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+html.dark body {
+  background-image: url("/dark-mode.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 /* ... */
 
 @layer base {
   :root {
-
     --background: 0 0% 100%;
 
     --foreground: 0 0% 3.9%;
@@ -55,10 +85,9 @@
 
     --chart-5: 27 87% 67%;
 
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
   .dark {
-
     --background: 0 0% 3.9%;
 
     --foreground: 0 0% 98%;
@@ -105,7 +134,7 @@
 
     --chart-4: 280 65% 60%;
 
-    --chart-5: 340 75% 55%
+    --chart-5: 340 75% 55%;
   }
 }
 

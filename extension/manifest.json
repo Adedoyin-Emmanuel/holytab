@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Holy Tab",
+  "description": "Get fresh, Bible-centered confessions on every new tab. Stay inspired and rooted in faith throughout your day.",
+  "version": "1.0.0",
+  "icons": {
+    "16": "holy-16.png",
+    "32": "holy-32.png",
+    "48": "holy-48.png",
+    "128": "holy-128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com data:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' http://localhost:3002 https://holytab.vercel.app https://fonts.googleapis.com https://fonts.gstatic.com"
+  }
+}
