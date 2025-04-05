@@ -105,7 +105,7 @@ npm run dev
 ## Special Thanks 🙌
 
 1. Frames 56: Thank you soo much for working on this project with me. I can't thank you enough.
-2. Kingsword International Ministeries (DR Kay Ijisesan): If you are wondering where most of the confessions came from, well they are from Kingsword specifically from DR Kayode Ijisesan. These confessions aren't just specific to a church, they are confessions every believer can meditate on. You may or may not see this but thank you sir. P.S. For anyone checking the source code looking for Easter eggs - like father, like daughter, always hiding gems in plain sight.
+2. Kingsword International Ministeries (DR Kay Ijisesan): If you are wondering where most of the confessions came from, well they are from Kingsword specifically from DR Kayode Ijisesan. These confessions aren't just specific to a church, they are confessions every believer can meditate on. You may or may not see this but thank you.
 
 ## Contributions
 
