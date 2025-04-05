@@ -6,6 +6,16 @@ Transform every new tab into a moment of spiritual reflection <https://holytab.a
 
 [Download HolyTab from Chrome webstore](https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd)
 
+## ✨ What's New
+
+**Latest Updates:**
+
+- **Customizable Experience**: Personalize your HolyTab experience with new settings options
+- **Auto-Refresh**: Set confessions to automatically refresh at your preferred intervals
+- **Seamless Updates**: Check for and install updates directly within the extension - no reinstallation needed!
+
+![New Customization Features](md-assets/img-1.png)
+
 ## Why Did I Build This ❓ / How I built this 🤔
 
 The spirit of God has laid it upon my heart last year (2023) to build a confession app. Then, I was in KTI (Kingsword Training Institute) Level 1. I didn't pay much attention to till last month (October 2024). Holy Spirit told me again and this time I was like yeah, I've to build this. I did some research to know if someone has built something like this before but to my surprise, I found none. Most bible related extensions were just typical bible verses chrome extensions and there wasn't a site where I could get a lot of confessions from. So I started building mine. I got confessions from Kingsword Chicago website. <https://chicago.kingsword.org>. And then I did some editing and then I had about 1,000 confessions. I got more confessions from my Deacon in church, then from my local church installation <https://kingswordalagbado.org>. After compling everthing, I had about 2k confessions to start with. I built an API out of it and then contacted Frames. Frames is a cool guy I met at Osca Fest (Tech event) last year. To my surprise he agreed to work on the project with me. I was so surprised because everytime I tried reaching out to a UI designer to work on a projct together, it is either I get aired or most times they are busy with other projects which I totally understand. He started working and then bingo Frames was done. Then I started cooking, and then before I knew it, I was done. I deployed the web version, tested it and sent it to my friends. I then packaged the extension to submit on chrome store. To my surprise, creating a developer account on Chrome costs $5. I was shocked. I had some funds on me but spending $5 on something I built for free and didn't monetize wasn't something I expected. But then, this zeal that woudln't allow me end this project just because of $5. I eventually paid the funds and published the extension to chrome store.
@@ -25,17 +35,22 @@ Holy Tab is a Chrome extension that transforms your new tab experience into a sp
 
 - **Daily Confessions**: Fresh, Bible-centered confessions on every new tab
 - **Beautiful Interface**: Clean and distraction-free design
+- **Customizable Experience**: Personalize your experience with various settings
+- **Auto-Refresh**: Set confessions to automatically refresh at your preferred intervals
+- **Seamless Updates**: Easily update the extension without reinstallation
 - **Spiritual Growth**: Stay connected to your faith while browsing
 - **Lightweight**: Fast-loading and resource-efficient
 - **Offline Support**: Access confessions even without internet connection
-- **Free & Open Source**: It is free and open source.
-- **Social Sharing**: Share your confessions with folks on various social platforms.
-- **Web Version**: We also have a web version you can try even without installing the chrome extension. <https://holytab.adedoyin.dev>
+- **Free & Open Source**: It is free and open source
+- **Social Sharing**: Share your confessions with folks on various social platforms
+- **Web Version**: We also have a web version you can try even without installing the chrome extension <https://holytab.adedoyin.dev>
 
-![Features Overview](md-assets/illustration-2.png)
+![Customization Options](md-assets/img-1.png)
 
 ## 🔧 Installation
+
 [Download HolyTab from Chrome webstore](https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd)
+
 1. Visit the [Chrome Web Store](https://chrome.google.com/webstore)
 2. Search for "Holy Tab" or click the direct link
 3. Click "Add to Chrome"
@@ -45,9 +60,24 @@ Holy Tab is a Chrome extension that transforms your new tab experience into a sp
 
 1. Simply open a new tab in Chrome
 2. Read and meditate on the displayed confession
-3. Refresh the page for a new confession (optional)
-4. Share confession with your friends and family on various social platforms.
-5. Visit  <https://documenter.getpostman.com/view/25154969/2sAYBREtgn> to integrate Holytabs API in your app.
+3. Click the settings icon to customize your experience:
+   - Enable auto-refresh functionality
+   - Set your preferred refresh interval
+   - Check for updates directly within the extension
+4. Share confessions with your friends and family on various social platforms
+5. Visit <https://documenter.getpostman.com/view/25154969/2sAYBREtgn> to integrate Holytabs API in your app
+
+![Auto-Refresh Settings](md-assets/img-2.png)
+![Update Feature](md-assets/img-3.png)
+![Sharing Options](md-assets/img-4.png)
+
+## 🔄 Staying Updated
+
+HolyTab now features a seamless update mechanism:
+
+1. Click on the menu tab in the extension
+2. Select "Check for Update" in the modal
+3. Install any available updates without needing to reinstall the entire extension
 
 ## 🛠️ Development
 
@@ -75,7 +105,7 @@ npm run dev
 ## Special Thanks 🙌
 
 1. Frames 56: Thank you soo much for working on this project with me. I can't thank you enough.
-2. Kingsword International Ministeries (DR Kay Ijisesan): If you are wondering where most of the confessions came from, well they are from Kingsword specifically from DR Kayode Ijisesan. These confessions aren't just specific to a church, they are confessions every beliver can meditate on. You may or may not see this but thank you sir.
+2. Kingsword International Ministeries (DR Kay Ijisesan): If you are wondering where most of the confessions came from, well they are from Kingsword specifically from DR Kayode Ijisesan. These confessions aren't just specific to a church, they are confessions every believer can meditate on. You may or may not see this but thank you sir. P.S. For anyone checking the source code looking for Easter eggs - like father, like daughter, always hiding gems in plain sight.
 
 ## Contributions
 
