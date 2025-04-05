@@ -12,7 +12,7 @@ const ConfessionContainer = () => {
   const [confessionText, setConfessionText] = useState(
     "I am the LORD, the God of all mankind. Is anything too hard for me?"
   );
-  const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timer | null>(null);
+  const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timeout | null>(null);
   const { settings, updateSettings } = useSettings();
 
   const fetchNewConfession = async () => {
@@ -43,7 +43,7 @@ const ConfessionContainer = () => {
       const timer = setInterval(
         fetchNewConfession,
         settings.refreshInterval * 1000
-      );
+      ) as unknown as NodeJS.Timeout;
       setRefreshTimer(timer);
     }
 
