@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useTheme } from "next-themes";
+import { Settings2, Monitor, Check } from "lucide-react";
+
 import {
   Dialog,
   DialogContent,
@@ -9,10 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
-import { Settings2, Monitor, Check } from "lucide-react";
 import { useSettings } from "@/hooks/useSettings";
 import { useConfessionDB } from "@/hooks/useConfessionDB";
-import { useTheme } from "next-themes";
 
 const SettingsModal = () => {
   const { theme, setTheme } = useTheme();
@@ -30,17 +31,17 @@ const SettingsModal = () => {
     setUpdateError(null);
     setUpdateSuccess(null);
 
+    const CONFESSION_UPDATE_URL =
+      "https://holytab.adedoyin.dev/api/confessions/update";
+
     try {
-      const response = await fetch(
-        "http://localhost:3002/api/confessions/update",
-        {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(CONFESSION_UPDATE_URL, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`Failed to fetch confessions: ${response.statusText}`);

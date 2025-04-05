@@ -5,8 +5,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Settings, Monitor } from "lucide-react";
 import { useTheme } from "next-themes";
+import { Settings, Monitor } from "lucide-react";
 
 const SettingsMenu = () => {
   const { setTheme } = useTheme();
