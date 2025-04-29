@@ -52,7 +52,7 @@ const ConfessionContainer = () => {
         clearInterval(refreshTimer);
       }
     };
-  }, [refreshTimer, settings.autoRefresh, settings.refreshInterval]);
+  }, [settings.autoRefresh, settings.refreshInterval]);
 
   return (
     <div className="h-screen flex items-center justify-center gap-5 flex-col relative">
