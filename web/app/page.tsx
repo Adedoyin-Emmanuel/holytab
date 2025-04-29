@@ -1,6 +1,8 @@
 import { Metadata, ResolvingMetadata } from "next";
 import AnnouncementBanner from "@/app/components/announcement-banner";
 import ConfessionContainer from "@/app/components/confession-container";
+import fs from "fs";
+import path from "path";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 10;
@@ -9,6 +11,27 @@ type Props = {
   params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+// Function to get a random confession from the data file
+async function getRandomConfession() {
+  try {
+    const dataPath = path.join(process.cwd(), "app/data/data.json");
+    const fileContent = fs.readFileSync(dataPath, "utf-8");
+    const data = JSON.parse(fileContent);
+    const confessions = data.affirmations || [];
+
+    if (confessions.length === 0) {
+      return null;
+    }
+
+    // Get a random confession
+    const randomIndex = Math.floor(Math.random() * confessions.length);
+    return confessions[randomIndex];
+  } catch (error) {
+    console.error("Error loading confession:", error);
+    return null;
+  }
+}
 
 export async function generateMetadata(
   { params, searchParams }: Props,
@@ -22,6 +45,11 @@ export async function generateMetadata(
       ? searchParams.confession[0]
       : searchParams.confession;
     confession = decodeURIComponent(decodeURIComponent(rawConfession));
+  } else {
+    const randomConfession = await getRandomConfession();
+    if (randomConfession) {
+      confession = randomConfession;
+    }
   }
 
   return {
@@ -48,11 +76,13 @@ export async function generateMetadata(
   };
 }
 
-export default function Home() {
+export default async function Home() {
+  const initialConfession = await getRandomConfession();
+
   return (
     <>
       <AnnouncementBanner />
-      <ConfessionContainer />
+      <ConfessionContainer initialConfession={initialConfession} />
     </>
   );
 }

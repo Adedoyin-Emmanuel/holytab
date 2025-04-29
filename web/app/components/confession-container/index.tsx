@@ -8,31 +8,57 @@ import Confession from "@/app/components/confession";
 import { Axios } from "@/config/axios";
 import { useSettings } from "@/app/hooks/useSettings";
 
-const ConfessionContainer = () => {
-  const [confessionText, setConfessionText] = useState(
-    "I am the LORD, the God of all mankind. Is anything too hard for me?"
+interface ConfessionContainerProps {
+  initialConfession: string | null;
+}
+
+const ConfessionContainer = ({
+  initialConfession,
+}: ConfessionContainerProps) => {
+  const [confessionText, setConfessionText] = useState<string | null>(
+    initialConfession
   );
+  const [isLoading, setIsLoading] = useState(initialConfession === null);
   const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timeout | null>(null);
   const { settings, updateSettings } = useSettings();
 
   const fetchNewConfession = async () => {
     try {
-      const response = await Axios.post("/confession", {
+      console.log("Fetching new confession...");
+      setIsLoading(true);
+
+      const response = await Axios.post("/api/confessions", {
         take: 1,
-        randomize: true,
+        mode: "random",
       });
 
-      if (response.status === 200) {
-        setConfessionText(response.data.data.confessions[0]);
+      console.log("API Response:", response);
+
+      if (
+        response.status === 200 &&
+        response.data.success &&
+        response.data.data.confessions &&
+        response.data.data.confessions.length > 0
+      ) {
+        const newConfession = response.data.data.confessions[0];
+        console.log("Setting new confession:", newConfession);
+        setConfessionText(newConfession);
+      } else {
+        console.error("Invalid API response format:", response.data);
       }
     } catch (error) {
       console.error("Error fetching confession:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchNewConfession();
-  }, []);
+    // Only fetch new confession if we don't have an initial one
+    if (initialConfession === null) {
+      fetchNewConfession();
+    }
+  }, [initialConfession]);
 
   useEffect(() => {
     if (refreshTimer) {
@@ -74,7 +100,13 @@ const ConfessionContainer = () => {
 
       <section className="w-full flex items-center flex-col overflow-x-hidden">
         <ConfessionBadge />
-        <Confession text={confessionText} />
+        {isLoading ? (
+          <div className="text-center text-lg font-medium animate-pulse">
+            Loading confession...
+          </div>
+        ) : (
+          <Confession text={confessionText || ""} />
+        )}
       </section>
 
       <br />
@@ -86,7 +118,7 @@ const ConfessionContainer = () => {
       <br />
 
       <p className="uppercase text-sm">Share on your socials below</p>
-      <SocialIcons confessionText={confessionText} />
+      <SocialIcons confessionText={confessionText || ""} />
     </div>
   );
 };
