@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import path from "path";
 import fs from "fs";
+import path from "path";
+import { NextResponse } from "next/server";
 
 let cachedData: any = null;
 

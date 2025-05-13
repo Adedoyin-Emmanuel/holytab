@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { cn } from "@/lib/utils";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+
+import "./globals.css";
+import { cn } from "@/lib/utils";
 
 const bai_jamjuree = Bai_Jamjuree({ subsets: ["latin"], weight: "400" });
 
@@ -31,7 +31,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@frames_arc",
+    site: "https://holytab.adedoyin.dev",
     creator: "@Emmysoft_Tm",
     title: "Holy Tab - Bible-Centered Confessions",
     description:

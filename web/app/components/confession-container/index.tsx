@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import SettingsModal from "@/app/components/settings-modal";
-import SocialIcons from "@/app/components/social-icons";
-import ConfessionBadge from "@/app/components/confession-badge";
-import Confession from "@/app/components/confession";
+
 import { Axios } from "@/config/axios";
+import Confession from "@/app/components/confession";
 import { useSettings } from "@/app/hooks/useSettings";
+import SocialIcons from "@/app/components/social-icons";
+import SettingsModal from "@/app/components/settings-modal";
+import ConfessionBadge from "@/app/components/confession-badge";
 
 interface ConfessionContainerProps {
   initialConfession: string | null;

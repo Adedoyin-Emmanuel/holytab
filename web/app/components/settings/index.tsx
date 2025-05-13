@@ -1,12 +1,13 @@
 "use client";
+import { useTheme } from "next-themes";
+import { Settings, Monitor } from "lucide-react";
+
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
-import { Settings, Monitor } from "lucide-react";
-import { useTheme } from "next-themes";
 
 const SettingsMenu = () => {
   const { setTheme } = useTheme();

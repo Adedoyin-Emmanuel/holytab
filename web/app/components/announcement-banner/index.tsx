@@ -1,6 +1,7 @@
 import React from "react";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
+
+import { cn } from "@/lib/utils";
 
 const AnnouncementBanner = () => {
   return (
@@ -23,7 +24,11 @@ const AnnouncementBanner = () => {
           Stay inspired with daily Bible confessions every time you open a new
           tab.
         </h1>
-        <Link href="https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd" target="_blank" className={cn("underline")}>
+        <Link
+          href="https://chromewebstore.google.com/detail/holytab/iflnngdlafnhjjebkiocghjpkaplebpd"
+          target="_blank"
+          className={cn("underline")}
+        >
           Download our Chrome extension today!
         </Link>{" "}
       </div>

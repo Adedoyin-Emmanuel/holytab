@@ -1,10 +1,9 @@
-import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    // Load confessions from the data file
     const dataPath = path.join(process.cwd(), "app/data/data.json");
     const fileContent = fs.readFileSync(dataPath, "utf-8");
     const data = JSON.parse(fileContent);
@@ -20,7 +19,6 @@ export async function GET() {
       );
     }
 
-    // Get a random confession
     const randomIndex = Math.floor(Math.random() * confessions.length);
     const confession = confessions[randomIndex];
 

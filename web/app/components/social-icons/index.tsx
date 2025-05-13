@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { IoLogoWhatsapp, IoLogoTwitter } from "react-icons/io";
-import { SiTelegram, SiReddit } from "react-icons/si";
 import { FaFacebook } from "react-icons/fa";
+import { SiTelegram, SiReddit } from "react-icons/si";
+import { IoLogoWhatsapp, IoLogoTwitter } from "react-icons/io";
 
 interface SocialIconsProps {
   confessionText: string;

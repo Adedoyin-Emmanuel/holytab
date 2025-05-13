@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { rateLimiter } from "./../utils/rateLimiter";
 
 export const rateLimiterMiddleware = async (req: Request) => {

@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+
 import { cn } from "@/lib/utils";
 
 const timesNewRoman = localFont({

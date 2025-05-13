@@ -2,19 +2,20 @@
 
 import React from "react";
 import { useTheme } from "next-themes";
+import { Settings2, Monitor } from "lucide-react";
+
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
   DialogTitle,
+  DialogHeader,
+  DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
+import { bai_jamjuree } from "@/app/fonts";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Settings2, Monitor } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { bai_jamjuree } from "@/app/fonts";
 
 interface SettingsModalProps {
   autoRefresh: boolean;
