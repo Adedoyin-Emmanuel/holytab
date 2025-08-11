@@ -21,6 +21,9 @@ function loadConfessions(forceReload: boolean = false) {
       const fileContent = fs.readFileSync(dataPath, "utf-8");
       const data = JSON.parse(fileContent);
       cachedData = data.affirmations || [];
+
+      console.log("Cached data:", cachedData);
+      console.log("Cached data length:", cachedData.length);
     } catch (error) {
       console.error("Error loading confessions:", error);
       return [];

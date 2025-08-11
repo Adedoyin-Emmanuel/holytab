@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ConfessionBadge from "@/components/confession-badge";
 import Confession from "@/components/confession";
 import SettingsModal from "@/components/settings-modal";
+import AnnouncementBanner from "@/components/announcement-banner";
 import SocialIcons from "@/components/social-icons";
 import { useSettings } from "@/hooks/useSettings";
 import { useConfessionDB } from "@/hooks/useConfessionDB";
@@ -14,7 +15,7 @@ const App = () => {
   );
   const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timer | null>(null);
   const { settings } = useSettings();
-  const { confessions } = useConfessionDB();
+  const { confessions, shouldShowBanner } = useConfessionDB();
   const { theme } = useTheme();
 
   const getRandomConfession = () => {
@@ -70,7 +71,12 @@ const App = () => {
   }, [theme]);
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center gap-5 flex-col relative">
+    <div
+      className={`w-screen h-screen flex items-center justify-center gap-5 flex-col relative ${
+        shouldShowBanner ? "pt-16" : ""
+      }`}
+    >
+      <AnnouncementBanner />
       <SettingsModal />
 
       <br />

@@ -12,6 +12,12 @@ interface UseConfessionDBReturn {
   addConfession: (text: string) => Promise<void>;
   updateConfessions: (newConfessions: string[]) => Promise<void>;
   clearConfessions: () => Promise<void>;
+  fetchNewConfessions: () => Promise<{
+    success: boolean;
+    count: number;
+    message: string;
+  }>;
+  shouldShowBanner: boolean;
   isLoading: boolean;
   error: Error | null;
 }
@@ -19,6 +25,10 @@ interface UseConfessionDBReturn {
 const DB_NAME = "holy-tab-db";
 const STORE_NAME = "confessions";
 const DB_VERSION = 1;
+
+// Banner timing constants
+const BANNER_INTERVAL_MS = 3 * 7 * 24 * 60 * 60 * 1000; // 3 weeks in milliseconds
+const LAST_BANNER_SHOWN_KEY = "holy-tab-last-banner-shown";
 
 // Default confessions that will be loaded when the DB is first created
 const DEFAULT_CONFESSIONS = [
@@ -34,6 +44,120 @@ export function useConfessionDB(): UseConfessionDBReturn {
   const [confessions, setConfessions] = useState<Confession[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const [shouldShowBanner, setShouldShowBanner] = useState(false);
+
+  // Check if banner should be shown
+  const checkBannerTiming = () => {
+    const lastShown = localStorage.getItem(LAST_BANNER_SHOWN_KEY);
+    if (!lastShown) {
+      // First time, show banner
+      setShouldShowBanner(true);
+      return;
+    }
+
+    const lastShownTime = parseInt(lastShown, 10);
+    const now = Date.now();
+    const timeSinceLastShown = now - lastShownTime;
+
+    if (timeSinceLastShown >= BANNER_INTERVAL_MS) {
+      setShouldShowBanner(true);
+    } else {
+      setShouldShowBanner(false);
+    }
+  };
+
+  // Mark banner as shown
+  const markBannerAsShown = () => {
+    localStorage.setItem(LAST_BANNER_SHOWN_KEY, Date.now().toString());
+    setShouldShowBanner(false);
+  };
+
+  // Fetch new confessions from API
+  const fetchNewConfessions = async (): Promise<{
+    success: boolean;
+    count: number;
+    message: string;
+  }> => {
+    if (!db) throw new Error("Database not initialized");
+
+    const CONFESSION_UPDATE_URL =
+      "http://localhost:3000/api/confessions/update";
+
+    try {
+      const response = await fetch(CONFESSION_UPDATE_URL, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch confessions: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message || "Failed to fetch confessions");
+      }
+
+      const newConfessions = data.data.confessions;
+      if (!newConfessions || newConfessions.length === 0) {
+        return {
+          success: false,
+          count: 0,
+          message: "No new confessions available to update.",
+        };
+      }
+
+      // Get existing confession texts
+      const tx = db.transaction(STORE_NAME, "readonly");
+      const store = tx.objectStore(STORE_NAME);
+      const existingConfessions = await store.getAll();
+      const existingTexts = new Set(existingConfessions.map((c) => c.text));
+
+      // Only add confessions that don't already exist
+      let addedCount = 0;
+      const writeTx = db.transaction(STORE_NAME, "readwrite");
+      const writeStore = writeTx.objectStore(STORE_NAME);
+
+      for (const text of newConfessions) {
+        if (!existingTexts.has(text)) {
+          const confession: Omit<Confession, "id"> = {
+            text,
+            timestamp: Date.now(),
+          };
+          await writeStore.add(confession);
+          addedCount++;
+        }
+      }
+
+      // Refresh confessions list
+      const updatedConfessions = await writeStore.getAll();
+      setConfessions(updatedConfessions);
+
+      // Mark banner as shown after successful update
+      markBannerAsShown();
+
+      if (addedCount === 0) {
+        return {
+          success: true,
+          count: 0,
+          message: "Your confessions are already up to date!",
+        };
+      }
+
+      return {
+        success: true,
+        count: addedCount,
+        message: `Successfully updated ${addedCount} new confessions!`,
+      };
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to update confessions";
+      throw new Error(errorMessage);
+    }
+  };
 
   useEffect(() => {
     const initDB = async () => {
@@ -77,6 +201,9 @@ export function useConfessionDB(): UseConfessionDBReturn {
         }
 
         setIsLoading(false);
+
+        // Check banner timing after DB is initialized
+        checkBannerTiming();
       } catch (err) {
         setError(
           err instanceof Error
@@ -174,6 +301,8 @@ export function useConfessionDB(): UseConfessionDBReturn {
     addConfession,
     updateConfessions,
     clearConfessions,
+    fetchNewConfessions,
+    shouldShowBanner,
     isLoading,
     error,
   };

@@ -18,7 +18,7 @@ import { useConfessionDB } from "@/hooks/useConfessionDB";
 const SettingsModal = () => {
   const { theme, setTheme } = useTheme();
   const { settings, updateSettings } = useSettings();
-  const { updateConfessions, isLoading } = useConfessionDB();
+  const { updateConfessions, isLoading, shouldShowBanner } = useConfessionDB();
   const [isUpdating, setIsUpdating] = useState(false);
   const [updateError, setUpdateError] = useState<string | null>(null);
   const [updateSuccess, setUpdateSuccess] = useState<{
@@ -32,7 +32,7 @@ const SettingsModal = () => {
     setUpdateSuccess(null);
 
     const CONFESSION_UPDATE_URL =
-      "https://holytab.adedoyin.dev/api/confessions/update";
+      "http://localhost:3000/api/confessions/update";
 
     try {
       const response = await fetch(CONFESSION_UPDATE_URL, {
@@ -75,7 +75,11 @@ const SettingsModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="absolute top-5 right-5 p-2 rounded-lg hover:bg-[#F28C8C33] dark:hover:bg-[#F5B7001A] transition-colors">
+        <button
+          className={`absolute top-5 right-5 p-2 rounded-lg hover:bg-[#F28C8C33] dark:hover:bg-[#F5B7001A] transition-colors ${
+            shouldShowBanner ? "hidden" : ""
+          }`}
+        >
           <Settings2 className="w-6 h-6" />
         </button>
       </DialogTrigger>
