@@ -22,22 +22,13 @@ interface UseConfessionDBReturn {
   error: Error | null;
 }
 
+const DB_VERSION = 1;
 const DB_NAME = "holy-tab-db";
 const STORE_NAME = "confessions";
-const DB_VERSION = 1;
 
-// Banner timing constants
-const BANNER_INTERVAL_MS = 3 * 7 * 24 * 60 * 60 * 1000; // 3 weeks in milliseconds
+const BANNER_INTERVAL_MS = 3 * 7 * 24 * 60 * 60 * 1000;
 const LAST_BANNER_SHOWN_KEY = "holy-tab-last-banner-shown";
-
-// Default confessions that will be loaded when the DB is first created
-const DEFAULT_CONFESSIONS = [
-  "I am the LORD, the God of all mankind. Is anything too hard for me?",
-  "For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you, plans to give you hope and a future.",
-  "The LORD is my shepherd, I lack nothing.",
-  "I can do all things through Christ who strengthens me.",
-  "Greater is He that is in me than he that is in the world.",
-];
+const CONFESSION_UPDATE_URL = "http://localhost:3000/api/confessions/update";
 
 export function useConfessionDB(): UseConfessionDBReturn {
   const [db, setDB] = useState<IDBPDatabase | null>(null);
@@ -46,11 +37,9 @@ export function useConfessionDB(): UseConfessionDBReturn {
   const [error, setError] = useState<Error | null>(null);
   const [shouldShowBanner, setShouldShowBanner] = useState(false);
 
-  // Check if banner should be shown
   const checkBannerTiming = () => {
     const lastShown = localStorage.getItem(LAST_BANNER_SHOWN_KEY);
     if (!lastShown) {
-      // First time, show banner
       setShouldShowBanner(true);
       return;
     }
@@ -66,22 +55,17 @@ export function useConfessionDB(): UseConfessionDBReturn {
     }
   };
 
-  // Mark banner as shown
   const markBannerAsShown = () => {
     localStorage.setItem(LAST_BANNER_SHOWN_KEY, Date.now().toString());
     setShouldShowBanner(false);
   };
 
-  // Fetch new confessions from API
   const fetchNewConfessions = async (): Promise<{
     success: boolean;
     count: number;
     message: string;
   }> => {
     if (!db) throw new Error("Database not initialized");
-
-    const CONFESSION_UPDATE_URL =
-      "http://localhost:3000/api/confessions/update";
 
     try {
       const response = await fetch(CONFESSION_UPDATE_URL, {
@@ -110,13 +94,11 @@ export function useConfessionDB(): UseConfessionDBReturn {
         };
       }
 
-      // Get existing confession texts
       const tx = db.transaction(STORE_NAME, "readonly");
       const store = tx.objectStore(STORE_NAME);
       const existingConfessions = await store.getAll();
       const existingTexts = new Set(existingConfessions.map((c) => c.text));
 
-      // Only add confessions that don't already exist
       let addedCount = 0;
       const writeTx = db.transaction(STORE_NAME, "readwrite");
       const writeStore = writeTx.objectStore(STORE_NAME);
@@ -132,11 +114,9 @@ export function useConfessionDB(): UseConfessionDBReturn {
         }
       }
 
-      // Refresh confessions list
       const updatedConfessions = await writeStore.getAll();
       setConfessions(updatedConfessions);
 
-      // Mark banner as shown after successful update
       markBannerAsShown();
 
       if (addedCount === 0) {
@@ -174,35 +154,53 @@ export function useConfessionDB(): UseConfessionDBReturn {
         });
         setDB(database);
 
-        // Load initial confessions
         const tx = database.transaction(STORE_NAME, "readonly");
         const store = tx.objectStore(STORE_NAME);
         const items = await store.getAll();
 
-        // If no confessions exist, add the default ones
         if (items.length === 0) {
-          const writeTx = database.transaction(STORE_NAME, "readwrite");
-          const writeStore = writeTx.objectStore(STORE_NAME);
-
-          for (const text of DEFAULT_CONFESSIONS) {
-            await writeStore.add({
-              text,
-              timestamp: Date.now(),
+          try {
+            const response = await fetch(CONFESSION_UPDATE_URL, {
+              method: "POST",
+              mode: "cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
             });
-          }
 
-          // Get the newly added confessions
-          const newTx = database.transaction(STORE_NAME, "readonly");
-          const newStore = newTx.objectStore(STORE_NAME);
-          const newItems = await newStore.getAll();
-          setConfessions(newItems);
+            if (response.ok) {
+              const data = await response.json();
+              if (data.success && data.data.confessions) {
+                const writeTx = database.transaction(STORE_NAME, "readwrite");
+                const writeStore = writeTx.objectStore(STORE_NAME);
+
+                for (const text of data.data.confessions) {
+                  await writeStore.add({
+                    text,
+                    timestamp: Date.now(),
+                  });
+                }
+
+                const newTx = database.transaction(STORE_NAME, "readonly");
+                const newStore = newTx.objectStore(STORE_NAME);
+                const newItems = await newStore.getAll();
+                setConfessions(newItems);
+              } else {
+                setConfessions([]);
+              }
+            } else {
+              setConfessions([]);
+            }
+          } catch (err) {
+            console.warn("Failed to fetch initial confessions:", err);
+            setConfessions([]);
+          }
         } else {
           setConfessions(items);
         }
 
         setIsLoading(false);
 
-        // Check banner timing after DB is initialized
         checkBannerTiming();
       } catch (err) {
         setError(
@@ -236,7 +234,6 @@ export function useConfessionDB(): UseConfessionDBReturn {
       const store = tx.objectStore(STORE_NAME);
       await store.add(confession);
 
-      // Refresh confessions list
       const updatedConfessions = await store.getAll();
       setConfessions(updatedConfessions);
     } catch (err) {
@@ -254,11 +251,9 @@ export function useConfessionDB(): UseConfessionDBReturn {
       const tx = db.transaction(STORE_NAME, "readwrite");
       const store = tx.objectStore(STORE_NAME);
 
-      // Get existing confession texts
       const existingConfessions = await store.getAll();
       const existingTexts = new Set(existingConfessions.map((c) => c.text));
 
-      // Only add confessions that don't already exist
       for (const text of newConfessions) {
         if (!existingTexts.has(text)) {
           const confession: Omit<Confession, "id"> = {
@@ -269,7 +264,6 @@ export function useConfessionDB(): UseConfessionDBReturn {
         }
       }
 
-      // Refresh confessions list
       const updatedConfessions = await store.getAll();
       setConfessions(updatedConfessions);
     } catch (err) {
@@ -297,13 +291,13 @@ export function useConfessionDB(): UseConfessionDBReturn {
   };
 
   return {
+    error,
+    isLoading,
     confessions,
     addConfession,
-    updateConfessions,
-    clearConfessions,
-    fetchNewConfessions,
     shouldShowBanner,
-    isLoading,
-    error,
+    clearConfessions,
+    updateConfessions,
+    fetchNewConfessions,
   };
 }
