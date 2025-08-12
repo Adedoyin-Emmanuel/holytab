@@ -13,7 +13,7 @@ Transform every new tab into a moment of spiritual reflection <https://holytab.a
 - **Seamless Updates**: You will be notified to check for updates every 3 weeks. Also, you get all 2.6k confessions after installing the extension (all local) no internet connection required!
 
 
-![New Customization Features](md-assets/img-1.png)
+![New Customization Features](md-assets/confession-update-prompt.png)
 
 ## Why Did I Build This ❓ / How I built this 🤔
 
