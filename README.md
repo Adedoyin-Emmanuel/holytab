@@ -10,9 +10,8 @@ Transform every new tab into a moment of spiritual reflection <https://holytab.a
 
 **Latest Updates:**
 
-- **Customizable Experience**: Personalize your HolyTab experience with new settings options
-- **Auto-Refresh**: Set confessions to automatically refresh at your preferred intervals
-- **Seamless Updates**: Check for and install updates directly within the extension - no reinstallation needed!
+- **Seamless Updates**: You will be notified to check for updates every 3 weeks. Also, you get all 2.6k confessions after installing the extension (all local) no internet connection required!
+
 
 ![New Customization Features](md-assets/img-1.png)
 
