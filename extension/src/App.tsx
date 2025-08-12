@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import ConfessionBadge from "@/components/confession-badge";
-import Confession from "@/components/confession";
-import SettingsModal from "@/components/settings-modal";
-import AnnouncementBanner from "@/components/announcement-banner";
-import SocialIcons from "@/components/social-icons";
-import { useSettings } from "@/hooks/useSettings";
-import { useConfessionDB } from "@/hooks/useConfessionDB";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+
 import "./App.css";
+import Confession from "@/components/confession";
+import { useSettings } from "@/hooks/settings";
+import SocialIcons from "@/components/social-icons";
+import SettingsModal from "@/components/settings-modal";
+import { useConfessionDB } from "@/hooks/confessions-db";
+import ConfessionBadge from "@/components/confession-badge";
+import AnnouncementBanner from "@/components/announcement-banner";
 
 const App = () => {
-  const [confessionText, setConfessionText] = useState(
-    "I am the LORD, the God of all mankind. Is anything too hard for me?"
-  );
-  const [refreshTimer, setRefreshTimer] = useState<NodeJS.Timer | null>(null);
+  const [confessionText, setConfessionText] = useState("");
+  const [refreshTimer, setRefreshTimer] = useState<ReturnType<
+    typeof setInterval
+  > | null>(null);
   const { settings } = useSettings();
   const { confessions, shouldShowBanner } = useConfessionDB();
   const { theme } = useTheme();
@@ -28,14 +29,12 @@ const App = () => {
     setConfessionText(getRandomConfession());
   };
 
-  // Initial confession on mount
   useEffect(() => {
-    if (confessions.length > 0) {
+    if (confessions.length > 0 && !confessionText) {
       updateConfessionText();
     }
-  }, [confessions]);
+  }, [confessions, confessionText]);
 
-  // Auto refresh timer
   useEffect(() => {
     if (refreshTimer) {
       clearInterval(refreshTimer);
@@ -56,7 +55,6 @@ const App = () => {
     };
   }, [settings.autoRefresh, settings.refreshInterval, confessions]);
 
-  // Theme handling
   useEffect(() => {
     const root = document.documentElement;
     if (

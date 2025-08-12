@@ -12,8 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
-import { useSettings } from "@/hooks/useSettings";
-import { useConfessionDB } from "@/hooks/useConfessionDB";
+import { useSettings } from "@/hooks/settings";
+import { useConfessionDB } from "@/hooks/confessions-db";
 
 const SettingsModal = () => {
   const { theme, setTheme } = useTheme();

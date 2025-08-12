@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 
-
 import { shuffleArray } from "../utils/shuffle";
 import { confessionSchema } from "../schema/schema";
 import { rateLimiterMiddleware } from "../middlewares/limiter";
@@ -21,11 +20,7 @@ function loadConfessions(forceReload: boolean = false) {
       const fileContent = fs.readFileSync(dataPath, "utf-8");
       const data = JSON.parse(fileContent);
       cachedData = data.affirmations || [];
-
-      console.log("Cached data:", cachedData);
-      console.log("Cached data length:", cachedData.length);
     } catch (error) {
-      console.error("Error loading confessions:", error);
       return [];
     }
   }
@@ -75,7 +70,7 @@ export async function POST(req: Request) {
         {
           status: 400,
           headers,
-        }
+        },
       );
     }
 
@@ -96,13 +91,13 @@ export async function POST(req: Request) {
         {
           status: 404,
           headers,
-        }
+        },
       );
     }
 
     if (search) {
       confessions = confessions.filter((confession: string) =>
-        confession.toLowerCase().includes(search.toLowerCase())
+        confession.toLowerCase().includes(search.toLowerCase()),
       );
     }
 
@@ -133,7 +128,7 @@ export async function POST(req: Request) {
       {
         status: 200,
         headers,
-      }
+      },
     );
   } catch (err) {
     return NextResponse.json(
@@ -152,7 +147,7 @@ export async function POST(req: Request) {
           "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type",
         },
-      }
+      },
     );
   }
 }

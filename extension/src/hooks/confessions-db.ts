@@ -22,6 +22,7 @@ interface UseConfessionDBReturn {
   error: Error | null;
 }
 
+
 const DB_VERSION = 1;
 const DB_NAME = "holy-tab-db";
 const STORE_NAME = "confessions";
@@ -36,10 +37,12 @@ export function useConfessionDB(): UseConfessionDBReturn {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [shouldShowBanner, setShouldShowBanner] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   const checkBannerTiming = () => {
     const lastShown = localStorage.getItem(LAST_BANNER_SHOWN_KEY);
     if (!lastShown) {
+      // Show banner if localStorage is cleared (user manually cleared or first time)
       setShouldShowBanner(true);
       return;
     }
@@ -140,6 +143,8 @@ export function useConfessionDB(): UseConfessionDBReturn {
   };
 
   useEffect(() => {
+    if (isInitialized) return;
+
     const initDB = async () => {
       try {
         const database = await openDB(DB_NAME, DB_VERSION, {
@@ -174,17 +179,26 @@ export function useConfessionDB(): UseConfessionDBReturn {
                 const writeTx = database.transaction(STORE_NAME, "readwrite");
                 const writeStore = writeTx.objectStore(STORE_NAME);
 
+                const existingConfessions = await writeStore.getAll();
+                const existingTexts = new Set(
+                  existingConfessions.map((c) => c.text)
+                );
+
                 for (const text of data.data.confessions) {
-                  await writeStore.add({
-                    text,
-                    timestamp: Date.now(),
-                  });
+                  if (!existingTexts.has(text)) {
+                    await writeStore.add({
+                      text,
+                      timestamp: Date.now(),
+                    });
+                  }
                 }
 
                 const newTx = database.transaction(STORE_NAME, "readonly");
                 const newStore = newTx.objectStore(STORE_NAME);
                 const newItems = await newStore.getAll();
                 setConfessions(newItems);
+
+                markBannerAsShown();
               } else {
                 setConfessions([]);
               }
@@ -200,6 +214,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
         }
 
         setIsLoading(false);
+        setIsInitialized(true);
 
         checkBannerTiming();
       } catch (err) {
@@ -209,6 +224,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
             : new Error("Failed to initialize database")
         );
         setIsLoading(false);
+        setIsInitialized(true);
       }
     };
 
@@ -219,7 +235,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
         db.close();
       }
     };
-  }, []);
+  }, [isInitialized]);
 
   const addConfession = async (text: string) => {
     if (!db) throw new Error("Database not initialized");
