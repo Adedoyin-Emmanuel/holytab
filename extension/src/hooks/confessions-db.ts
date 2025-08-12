@@ -22,14 +22,14 @@ interface UseConfessionDBReturn {
   error: Error | null;
 }
 
-
 const DB_VERSION = 1;
 const DB_NAME = "holy-tab-db";
 const STORE_NAME = "confessions";
 
 const BANNER_INTERVAL_MS = 3 * 7 * 24 * 60 * 60 * 1000;
 const LAST_BANNER_SHOWN_KEY = "holy-tab-last-banner-shown";
-const CONFESSION_UPDATE_URL = "http://localhost:3000/api/confessions/update";
+const CONFESSION_UPDATE_URL =
+  "https://holytab.adedoyin.dev/api/confessions/update";
 
 export function useConfessionDB(): UseConfessionDBReturn {
   const [db, setDB] = useState<IDBPDatabase | null>(null);
@@ -181,7 +181,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
 
                 const existingConfessions = await writeStore.getAll();
                 const existingTexts = new Set(
-                  existingConfessions.map((c) => c.text)
+                  existingConfessions.map((c) => c.text),
                 );
 
                 for (const text of data.data.confessions) {
@@ -221,7 +221,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
         setError(
           err instanceof Error
             ? err
-            : new Error("Failed to initialize database")
+            : new Error("Failed to initialize database"),
         );
         setIsLoading(false);
         setIsInitialized(true);
@@ -254,7 +254,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
       setConfessions(updatedConfessions);
     } catch (err) {
       setError(
-        err instanceof Error ? err : new Error("Failed to add confession")
+        err instanceof Error ? err : new Error("Failed to add confession"),
       );
       throw err;
     }
@@ -284,7 +284,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
       setConfessions(updatedConfessions);
     } catch (err) {
       setError(
-        err instanceof Error ? err : new Error("Failed to update confessions")
+        err instanceof Error ? err : new Error("Failed to update confessions"),
       );
       throw err;
     }
@@ -300,7 +300,7 @@ export function useConfessionDB(): UseConfessionDBReturn {
       setConfessions([]);
     } catch (err) {
       setError(
-        err instanceof Error ? err : new Error("Failed to clear confessions")
+        err instanceof Error ? err : new Error("Failed to clear confessions"),
       );
       throw err;
     }

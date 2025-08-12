@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { useConfessionDB } from "@/hooks/confessions-db";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
