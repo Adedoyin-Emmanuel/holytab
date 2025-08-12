@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Holy Tab",
   "description": "Get fresh, Bible-centered confessions on every new tab. Stay inspired and rooted in faith throughout your day.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "icons": {
     "16": "holy-16.png",
     "32": "holy-32.png",
